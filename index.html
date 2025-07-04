@@ -12,13 +12,27 @@
       height: 100%;
       font-family: 'Orbitron', sans-serif;
       color: #ffffff;
-      background: url('https://images.unsplash.com/photo-1580128633826-927217e2ba6b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
-      background-size: cover;
+      background: radial-gradient(ellipse at bottom, #0d0d1a 0%, #000000 100%);
+      overflow: hidden;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
+    }
+
+    .stars {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: transparent url('https://www.transparenttextures.com/patterns/stardust.png') repeat;
+      animation: moveStars 60s linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes moveStars {
+      0% { background-position: 0 0; }
+      100% { background-position: -1000px 1000px; }
     }
 
     .overlay {
@@ -28,11 +42,11 @@
       bottom: 0;
       left: 0;
       right: 0;
-      z-index: 0;
+      z-index: 1;
     }
 
     .content {
-      z-index: 1;
+      z-index: 3;
       padding: 20px;
     }
 
@@ -55,10 +69,40 @@
     button:hover {
       background-color: #45a29e;
     }
+
+    .orbit-container {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      margin-top: -100px;
+      margin-left: -100px;
+      z-index: 2;
+      animation: rotate 20s linear infinite;
+    }
+
+    .planet {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      font-size: 40px;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
   </style>
 </head>
 <body>
+  <div class="stars"></div>
   <div class="overlay"></div>
+  <div class="orbit-container">
+    <div class="planet">🪐</div>
+  </div>
   <div class="content">
     <h1 id="message"></h1>
     <button onclick="window.location.href='https://echoesoforbit.com'">Enter Orbit</button>
@@ -66,13 +110,13 @@
 
   <script>
     const messages = [
-      "Planet found. Life status: unknown.",
-      "Engaging warp drive... standby.",
-      "Echoes detected in the exosphere.",
-      "Cosmic dust tastes like irony.",
-      "A signal from orbit: it's witty.",
-      "No moon, just mood.",
-      "This isn’t your destination — it’s your launchpad."
+      "No ‘m’? That’s fine. Mystery suits you.",
+      "You left the ‘m’ behind like a true minimalist.",
+      "You typed .co, but the stars knew what you meant.",
+      "The ‘m’ escaped into the void. We brought it back.",
+      "You came from the .co dimension. Spooky. We like you.",
+      "“.co”? We see what you almost did there.",
+      "Echoes of Orbit... or Echoes of Almost."
     ];
 
     document.getElementById("message").innerText =
